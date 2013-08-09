@@ -19,7 +19,7 @@ First, clone the repository and run the setup script. This will build the binary
     chmod +x ./setup
     sudo ./setup
 
-Second, add your repositories to the config, which should now be found. "Repo" should be the name of your repository (without the username), and "Shell" is the shell script that will be run when GitHub hits the webhook. In most cases, you would keep them in `/etc/gohub/scripts`. You could also use an inline Bash command.
+Second, add your repositories to the config.json file, which should now be found in `/etc/gohub`. "Repo" should be the name of your repository (without the username), and "Shell" is the shell script that will be run when GitHub hits the webhook. In most cases, you would keep them in `/etc/gohub/scripts`. You could also use an inline Bash command.
 
     {
         "Hooks":[
