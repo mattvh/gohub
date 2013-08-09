@@ -8,8 +8,8 @@ cp ./gohub /usr/sbin/gohub
 
 #Set up /etc/gohub and move configuration there
 mkdir /etc/gohub
-cp ./scripts /etc/gohub/scripts
-cp ./config.json /etc/gohub/config.json
+cp -r ./scripts /etc/gohub/scripts
+cp -r ./config.json /etc/gohub/config.json
 
 
 #Install Upstart script
