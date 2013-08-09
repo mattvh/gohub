@@ -39,3 +39,18 @@ Of course, you still need to add the webhook to your repository on GitHub. The U
 
     http://example.org:8392/reponame_branch
     http://myawesomeexamplesite.net:8392/myrepo_master
+
+
+## Example Deployment Script
+
+This is the script I use to deploy [Jekyll Themes.](http://jekyllthemes.org/) (It's really nice, since I can review a pull request, merge it in-browser, and have the changes instantly go live.)
+
+    #!/bin/bash -l
+    GIT_REPO=https://github.com/redwallhp/jekyllthemes.git
+    TMP_GIT_CLONE=$HOME/tmp/git/jekyllthemes
+    PUBLIC_WWW=/var/www/sites/jekyllthemes
+    
+    git clone $GIT_REPO $TMP_GIT_CLONE
+    jekyll build --source $TMP_GIT_CLONE --destination $PUBLIC_WWW
+    rm -Rf $TMP_GIT_CLONE
+    exit
