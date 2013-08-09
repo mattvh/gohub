@@ -84,8 +84,8 @@ func executeShell(shell string) {
 
 var (
 	port       = flag.String("port", "7654", "port to listen on")
-	configFile = flag.String("config", "./config.json", "config")
-    logFile    = flag.String("log", "./log", "log file")
+	configFile = flag.String("config", "/etc/gohub/config.json", "config")
+    logFile    = flag.String("log", "/etc/gohub/log", "log file")
 )
 
 func init() {

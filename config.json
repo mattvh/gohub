@@ -1,0 +1,9 @@
+{
+    "Hooks":[
+        {
+            "Repo": "yourawesomerepo",
+            "Branch": "master",
+            "Shell": "scripts/yourawesomerepo"
+        }
+    ]
+}

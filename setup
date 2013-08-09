@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+
+#Build GoHub and move it to /usr/sbin
+go build
+cp ./gohub /usr/sbin/gohub
+
+
+#Set up /etc/gohub and move configuration there
+mkdir /etc/gohub
+cp ./scripts /etc/gohub/scripts
+cp ./config.json /etc/gohub/config.json
+
+
+#Install Upstart script
+cp ./upstart/gohub.conf /etc/init/gohub.conf

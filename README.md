@@ -1,37 +1,41 @@
-gohub
+GoHub
 =====
 
-## What is gohub?
+## What is GoHub?
 
-gohub is a little webserver written in go. He waits for webhook calls by github to run little shell commands.
+GoHub is a little webserver written in go, [originally by adeven.](https://github.com/adeven/gohub) This fork is a little something I put together for my own usage. I moved the configuration and logs to /etc/gohub, made an Upstart script as well as a Bash installer script that builds the Go binary and copies everything to their proper places.
 
-## What is it good for?
+You can find further information about GoHub in the [original repository,](https://github.com/adeven/gohub) and in [this blog post]((http://big-elephants.com/2013-01/using-github-webhooks-for-deployment/)) by the author.
 
-Imagine you have your repo spread over several instances. You can use gohub to automate updating all your cloned repos.
 
-## How to use
+## Setup
 
-Just edit the config.json to your needs. A short example:
-You want to track the status of your Repository "repo" and the branch master. If there is an update to this branch you want to execute your shell script "niftyscript.sh".
+First, clone the repository and run the setup script. This will build the binary and copy files to their proper locations.
 
-```json
-{
-    "Hooks":[
-        {
-          "Repo":"repo",
-          "Branch":"master",
-          "Shell":"niftyscript.sh"
-        }
-    ]
-}
-```
+**Note:** You must have [Go](http://golang.org/) installed fist.
 
-Now start the server with
-  
-    go run main.go --port 6578
+    git clone https://github.com/redwallhp/gohub.git
+    cd gohub
+    chmod +x ./setup
+    sudo ./setup
 
-and add a git-webhook for your.domain.com:6578/repo_master. Everytime you push to master, your script gets executed.
+Second, add your repositories to the config, which should now be found. "Repo" should be the name of your repository (without the username), and "Shell" is the shell script that will be run when GitHub hits the webhook. In most cases, you would keep them in `/etc/gohub/scripts`. You could also use an inline Bash command.
 
-## What about safety?
+    {
+        "Hooks":[
+            {
+                "Repo": "yourawesomerepo",
+                "Branch": "master",
+                "Shell": "scripts/yourawesomerepo"
+            }
+        ]
+    }
 
-Git webhooks use only 4 different ips for their webhooks. (207.97.227.253, 50.57.128.197, 108.171.174.178, 50.57.231.61) You can easily restrict access to your gohup server by using either a firewall or an equivalent nginx configuration.
+Finally, fire GoHub up through Upstart.
+
+    service gohub start
+
+Of course, you still need to add the webhook to your repository on GitHub. The URL shoould be formed like this:
+
+    http://example.org:8392/reponame_branch
+    http://myawesomeexamplesite.net:8392/myrepo_master
