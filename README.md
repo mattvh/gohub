@@ -46,11 +46,18 @@ Of course, you still need to add the webhook to your repository on GitHub. The U
 This is the script I use to deploy [Jekyll Themes.](http://jekyllthemes.org/) (It's really nice, since I can review a pull request, merge it in-browser, and have the changes instantly go live.)
 
     #!/bin/bash -l
-    GIT_REPO=https://github.com/redwallhp/jekyllthemes.git
-    TMP_GIT_CLONE=$HOME/tmp/git/jekyllthemes
-    PUBLIC_WWW=/var/www/sites/jekyllthemes
+    # encoding: utf-8
+    
+    GIT_REPO=https://github.com/redwallhp/matt.harzewski.com.git
+    TMP_GIT_CLONE=/root/tmp/git/matt.harzewski.com
+    PUBLIC_WWW=/var/www/sites/matt/blog
+    
+    export LC_ALL=en_US.UTF-8
+    export LANG=en_US.UTF-8
+    export LANGUAGE=en_US.UTF-8
     
     git clone $GIT_REPO $TMP_GIT_CLONE
     jekyll build --source $TMP_GIT_CLONE --destination $PUBLIC_WWW
     rm -Rf $TMP_GIT_CLONE
     exit
+
